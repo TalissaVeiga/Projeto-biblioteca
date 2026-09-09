@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\Author; 
 
 class BookController extends Controller
 {
@@ -11,7 +13,13 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+
+    $books = Book::all();
+
+    return view('books.index', compact('books'));
+
+    return view('books.index', compact('books'));
+
     }
 
     /**
@@ -19,7 +27,10 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $authors = Author::all();
+
+    return view('books.create', compact('authors'));
+
     }
 
     /**
@@ -27,38 +38,75 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'title' => 'required',
+        'genre' => 'required',
+        'situation' => 'required',
+        'description' => 'required',
+        'author_id' => 'required',
+    ]);
+
+    Book::create([
+        'title' => $request->title,
+        'genre' => $request->genre,
+        'situation' => $request->situation,
+        'description' => $request->description,
+        'author_id' => $request->author_id,
+    ]);
+
+    return redirect()->route('books.index');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Book $book)
     {
-        //
+       return view('books.show', compact('book'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(Book $book)
+{
+    $authors = Author::all();
+
+    return view('books.edit', compact('book', 'authors'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request, Book $book)
+{
+    $request->validate([
+        'title' => 'required',
+        'genre' => 'required',
+        'situation' => 'required',
+        'description' => 'required',
+        'author_id' => 'required',
+    ]);
+
+    $book->update([
+        'title' => $request->title,
+        'genre' => $request->genre,
+        'situation' => $request->situation,
+        'description' => $request->description,
+        'author_id' => $request->author_id,
+    ]);
+
+    return redirect()->route('books.index');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy(Book $book)
+{
+    $book->delete();
+
+    return redirect()->route('books.index');
+}
 }
