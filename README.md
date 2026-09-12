@@ -56,3 +56,20 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Reflexões finais
+
+### 1. Qual foi a parte mais difícil de entender?
+
+Para mim, a parte mais difícil de entender foi a parte de Controller. Ainda resta um pouco de dúvida, mas pelo que pude entender, ele funciona como uma espécie de administrador dos comandos. Em outras palavras, ele decide o que fazer com a ação que o usuário manda no front-end para o PHP. Por exemplo, se ele vai usar index, store, update etc.
+
+### 2. Se você tivesse que explicar para um colega o caminho que uma requisição percorre desde o navegador até os dados aparecerem na tela, quais seriam os passos?
+
+O usuário executa uma ação no navegador → a rota encaminha a requisição para o método correto do CRUD → o Controller decide o que fazer com essa requisição → acessa o banco e executa a requisição do usuário → exibe o resultado na tela com a View → retornando novamente para o usuário com a respectiva View solicitada.
+
+Ainda tenho um pouco de dúvida sobre rota e Controller, pois parecem fazer a mesma coisa ou coisas muito parecidas.
+
+### 3. O que você faria diferente se precisasse adicionar uma terceira entidade ao sistema?
+
+Definiria qual seria a nova entidade a ser adicionada, pensaria em como ela se relacionaria com as outras entidades do banco, depois implementaria nos Models e assim por diante, criando também as migrations, relacionamentos, Controllers, rotas e Views necessários. 
